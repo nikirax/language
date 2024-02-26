@@ -46,14 +46,14 @@ namespace language
                             clients.Add(new Client
                             {
                                 ID = reader.GetInt32(0),
-                                FirstName = reader.GetString(2),
-                                LastName = reader.GetString(3),
+                                FirstName = reader.GetString(1),
+                                LastName = reader.GetString(2),
                                 Patronymic = reader.GetString(3),
-                                Bithday = reader.IsDBNull(5) ? (DateTime?)null : reader.GetDateTime(5).Date,
-                                RegistrationDate = reader.GetDateTime(8).Date,
-                                Email = reader.GetString(7),
-                                Phone = reader.GetString(6),
-                                GenderCode = reader.GetString(1) == "Мужской" ? 0 : 1,
+                                Bithday = reader.IsDBNull(4) ? (DateTime?)null : reader.GetDateTime(4).Date,
+                                RegistrationDate = reader.GetDateTime(5).Date,
+                                Email = reader.GetString(6),
+                                Phone = reader.GetString(7),
+                                GenderCode = reader.GetInt32(8),
                                 PhotoPath = reader.GetString(9)
                             });
                         }
@@ -180,15 +180,15 @@ namespace language
 
         private void Page_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
-            //var valueClients = LimitDataGrid();
-            //foreach (var client in valueClients)
-            //{
-            //    Gender clientGender = allGenders.FirstOrDefault(x => x.ID == client.GenderCode);
+            var valueClients = LimitDataGrid();
+            foreach (var client in valueClients)
+            {
+                Gender clientGender = allGenders.FirstOrDefault(x => x.ID == client.GenderCode);
 
-            //    client.Gender = clientGender;
+                client.Gender = clientGender;
 
-            //    MainGridSourse.Add(client);
-            //}
+                MainGridSourse.Add(client);
+            }
 
             ClientCount.Text = $"Всего записей: {MainGridSourse.Count()}";
 
