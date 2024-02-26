@@ -1,0 +1,116 @@
+﻿<Page x:Class="language.ClientPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:language"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="ClientPage" IsVisibleChanged="Page_IsVisibleChanged">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="3*"/>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="8*"/>
+            <RowDefinition Height="2*"/>
+        </Grid.RowDefinitions>
+        <TextBlock Text="Список клиентов"
+           FontSize="20"/>
+        <StackPanel Orientation="Horizontal"
+                    Margin="0 0 0 0"
+                    VerticalAlignment="Center"
+                    Grid.Row="2">
+            <TextBlock x:Name="ClientCount"
+                       Margin="20 0 20 0"
+                       FontFamily="Comic Sans MS"
+                       FontSize="13"
+                       Text="пример:"/>
+            <Button Click="BtnPagination"
+                    FontFamily="Comic Sans MS"
+                    FontSize="13"
+                    Background="#4aa1f4"
+                    Foreground="#fff"
+                    Content="Добавить еще 10 записей"
+                    MinWidth="200"/>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" Grid.Row="1" HorizontalAlignment="Center">
+            <StackPanel Margin="10 0">
+                <TextBlock Text="Сортировка"/>
+                <StackPanel Orientation="Horizontal">
+                    <ComboBox Name="SortComboBox" Width="100" Height="25" Margin="0 0 5 0"
+                              SelectionChanged="SortComboBox_SelectionChanged">
+                        <ComboBoxItem IsSelected="True" Content="нет"/>
+                        <ComboBoxItem Content="Фамилия"/>
+                        <ComboBoxItem Content="Дата регистрации"/>
+                    </ComboBox>
+                    <StackPanel>
+                        <RadioButton Name="UpRadioButton" Content="По возрастанию"
+                                     IsChecked="True"
+                                     Checked="UpRadioButton_Checked"/>
+                        <RadioButton Name="DownRadioButton" Content="По убыванию"
+                                     IsChecked="True"
+                                     Checked="DownRadioButton_Checked"/>
+                    </StackPanel>
+                </StackPanel>
+            </StackPanel>
+            <StackPanel Margin="10 0">
+                <TextBlock Text="Поиск"/>
+                <StackPanel Orientation="Horizontal">
+                    <ComboBox Name="SearchComboBox" Width="100" Height="25" Margin="0 0 5 0">
+                        <ComboBoxItem IsSelected="True" Content="Фамилия"/>
+                        <ComboBoxItem Content="Имя"/>
+                        <ComboBoxItem Content="Отчество"/>
+                        <ComboBoxItem Content="Email"/>
+                        <ComboBoxItem Content="Телефон"/>
+                    </ComboBox>
+                    <TextBox x:Name="SearchTextBox" Width="150"
+                             TextChanged="SearchTextBox_TextChanged"/>
+                </StackPanel>
+            </StackPanel>
+            <StackPanel Margin="10 0">
+                <TextBlock Text="Фильтрация"/>
+                <ComboBox Name="FiltrComboBox" Width="100" Height="25"
+                          SelectionChanged="FiltrComboBox_SelectionChanged"/>
+            </StackPanel>
+        </StackPanel>
+        <StackPanel Grid.Row="4" HorizontalAlignment="Right" Orientation="Horizontal">
+            <Button 
+                Content="Просмотр"
+                Name="Client"
+                Click="Client_Click"/>
+            <Button 
+                Content="Добавить"
+                Name="AddButton"
+                Click="AddButton_Click"/>
+            <Button 
+                Content="Редактировать"
+                Name="EditButton"
+                Click="EditButton_Click"
+                Width="120"/>
+            <Button 
+                Content="Удалить"
+                Name="DelButton"
+                Click="DelButton_Click"/>
+        </StackPanel>
+        <DataGrid FontFamily="Comic Sans MS" 
+                  x:Name="MainDataGrid" 
+                  Grid.Row="3"
+                  AutoGenerateColumns="False"
+                  IsReadOnly="True">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="№" Binding="{Binding ID}"/>
+                <DataGridTextColumn Header="Пол" Binding="{Binding Gender.Name}"/>
+                <DataGridTextColumn Header="Имя" Binding="{Binding FirstName}"/>
+                <DataGridTextColumn Header="Фамилия" Binding="{Binding LastName}"/>
+                <DataGridTextColumn Header="Отчество" Binding="{Binding Patronymic}"/>
+                <DataGridTextColumn Header="Дата рождения" Binding="{Binding Bithday}"/>
+                <DataGridTextColumn Header="Телефон" Binding="{Binding Phone}"/>
+                <DataGridTextColumn Header="Эл.почта" Binding="{Binding Email}"/>
+                <DataGridTextColumn Header="Дата добавления" Binding="{Binding RegistrationDate}"/>
+                <DataGridTextColumn Header="Фото" Binding="{Binding PhotoPath}"/>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</Page>
